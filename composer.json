@@ -1,0 +1,20 @@
+{
+  "name": "dietervyncke/dry-external-api",
+  "description": "An external API for your DRY applications",
+  "keywords": ["external-api", "API", "dry", "restful", "rest"],
+  "type": "library",
+  "authors": [
+    {
+      "name": "Dieter Vyncke",
+      "email": "vynckedieter@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tnt\\ExternalApi\\": "src/"
+    }
+  }
+}
