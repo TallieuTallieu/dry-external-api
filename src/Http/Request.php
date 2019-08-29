@@ -33,7 +33,7 @@ class Request
 	 */
 	public function __construct(\dry\http\Request $request)
 	{
-		$this->path = 'v'.$request->parameters->string('version').'/'.$request->parameters->string('path').'/';
+		$this->path = 'v'.$request->parameters->string('version').'/'.$request->parameters->string('path');
 		$this->method = $request->method;
 
 		$map = [
@@ -56,20 +56,17 @@ class Request
 
 		$authorizationHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? NULL;
 
-		if ($authorizationHeader)
-		{
-			if (stripos($authorizationHeader, 'Basic ') === 0)
-			{
+		if ($authorizationHeader) {
+
+			if (stripos($authorizationHeader, 'Basic ') === 0) {
 				$exploded = explode(':', base64_decode(substr($authorizationHeader, 6)), 2);
 
-				if (count($exploded) === 2)
-				{
+				if (count($exploded) === 2) {
 					$this->headers['USER'] = $exploded[0];
 					$this->headers['PASSWORD'] = $exploded[1];
 				}
 			}
-			elseif (stripos($authorizationHeader, 'Bearer ') === 0)
-			{
+			elseif (stripos($authorizationHeader, 'Bearer ') === 0) {
 				$this->headers['AUTHORIZATION'] = str_replace('Bearer ', '', $_SERVER['HTTP_AUTHORIZATION']);
 			}
 		}

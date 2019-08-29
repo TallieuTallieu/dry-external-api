@@ -12,7 +12,7 @@ class ExternalApiServiceProvider extends ServiceProvider
 	public function boot(ContainerInterface $app)
 	{
 		Router::register([
-			'api/v(?<version>\d+)/(?<path>.+)/' => '\\Tnt\\ExternalApi\\Facade\\Api::route',
+			'api/v(?<version>\d+)/(?<path>.+)' => '\\Tnt\\ExternalApi\\Facade\\Api::route',
 		]);
 	}
 
