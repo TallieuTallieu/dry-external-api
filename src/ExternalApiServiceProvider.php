@@ -18,6 +18,7 @@ class ExternalApiServiceProvider extends ServiceProvider
 
 	public function register(ContainerInterface $app)
 	{
+		$app->instance(ContainerInterface::class, $app);
 		$app->singleton(ApiRouter::class, ApiRouter::class);
 	}
 }

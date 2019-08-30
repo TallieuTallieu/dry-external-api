@@ -3,11 +3,17 @@
 namespace Tnt\ExternalApi\Router;
 
 use dry\internals\http\RequestDataWrapper;
+use Oak\Contracts\Container\ContainerInterface;
 use Tnt\ExternalApi\Exception\ApiException;
 use Tnt\ExternalApi\Http\Request;
 
 class Router
 {
+	/**
+	 * @var ContainerInterface $app
+	 */
+	private $app;
+
 	/**
 	 * @var array $get
 	 */
@@ -34,13 +40,12 @@ class Router
 	private $delete = [];
 
 	/**
-	 * @param string $version
-	 * @param string $pattern
-	 * @param $controller
+	 * Router constructor.
+	 * @param ContainerInterface $app
 	 */
-	public function get(string $version, string $pattern, $controller)
+	public function __construct(ContainerInterface $app)
 	{
-		$this->get['v'.$version.'/'.$pattern] = $controller;
+		$this->app = $app;
 	}
 
 	/**
@@ -48,9 +53,9 @@ class Router
 	 * @param string $pattern
 	 * @param $controller
 	 */
-	public function post(string $version, string $pattern, $controller)
+	public function get(string $version, string $pattern, $controller, $method)
 	{
-		$this->post['v'.$version.'/'.$pattern] = $controller;
+		$this->get['v'.$version.'/'.$pattern] = [$controller, $method];
 	}
 
 	/**
@@ -58,9 +63,9 @@ class Router
 	 * @param string $pattern
 	 * @param $controller
 	 */
-	public function put(string $version, string $pattern, $controller)
+	public function post(string $version, string $pattern, $controller, $method)
 	{
-		$this->put['v'.$version.'/'.$pattern] = $controller;
+		$this->post['v'.$version.'/'.$pattern] = [$controller, $method];
 	}
 
 	/**
@@ -68,9 +73,9 @@ class Router
 	 * @param string $pattern
 	 * @param $controller
 	 */
-	public function patch(string $version, string $pattern, $controller)
+	public function put(string $version, string $pattern, $controller, $method)
 	{
-		$this->patch['v'.$version.'/'.$pattern] = $controller;
+		$this->put['v'.$version.'/'.$pattern] = [$controller, $method];
 	}
 
 	/**
@@ -78,9 +83,19 @@ class Router
 	 * @param string $pattern
 	 * @param $controller
 	 */
-	public function delete(string $version, string $pattern, $controller)
+	public function patch(string $version, string $pattern, $controller, $method)
 	{
-		$this->delete['v'.$version.'/'.$pattern] = $controller;
+		$this->patch['v'.$version.'/'.$pattern] = [$controller, $method];
+	}
+
+	/**
+	 * @param string $version
+	 * @param string $pattern
+	 * @param $controller
+	 */
+	public function delete(string $version, string $pattern, $controller, $method)
+	{
+		$this->delete['v'.$version.'/'.$pattern] = [$controller, $method];
 	}
 
 	/**
@@ -114,17 +129,21 @@ class Router
 		foreach ($routes as $pattern => $controller) {
 
 			if (preg_match('#^('.$pattern.')$#', $request->getPath(), $m)) {
+
 				$request->parameters = new RequestDataWrapper($m);
 
-				try
-				{
+				$className = $controller[0];
+				$method = $controller[1];
+
+				$controllerInstance = $this->app->get($className);
+
+				try {
 					$return = [
 						'success' => true,
-						'result' => call_user_func($controller, $request),
+						'result' => call_user_func([$controllerInstance, $method], $request),
 					];
 				}
-				catch (ApiException $e)
-				{
+				catch (ApiException $e) {
 					$return = [
 						'success' => false,
 						'error_code' => $e->getCode(),
