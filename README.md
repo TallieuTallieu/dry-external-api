@@ -55,6 +55,7 @@ namespace Acme\Controller;
 
 use model\User;
 use dry\db\FetchException;
+use dry\db\DuplicateEntryException;
 use Tnt\ExternalApi\Exception\ApiException;
 use Tnt\ExternalApi\Http\Request;
 
@@ -85,12 +86,14 @@ class UserController
 		try
 		{
 			User::load_by( 'email', $request->data->string( 'email' ) );
-		throw new ApiException('duplicate_user');
-			// throw error
+		}
+		catch (DuplicateEntryException $e)
+		{
+		    throw new ApiException('duplicate_user');
 		}
 		catch(FetchException $e)
 		{
-		    // throw error
+		
 		}
 		
 		$user = new User();
