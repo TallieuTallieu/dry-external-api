@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "reinvanoyen/oak": "^1.0.0",
     "ext-json": "*"
   },
   "autoload": {
