@@ -83,18 +83,11 @@ class UserController
 			'password',
 		]);
 	
-		try
-		{
+		try {
 			User::load_by( 'email', $request->data->string( 'email' ) );
-		}
-		catch (DuplicateEntryException $e)
-		{
-		    throw new ApiException('duplicate_user');
-		}
-		catch(FetchException $e)
-		{
-		
-		}
+		} catch (DuplicateEntryException $e) {
+	    		throw new ApiException('duplicate_user');
+		} catch(FetchException $e) {}
 		
 		$user = new User();
 		$user->email = $request->data->string( 'email' );
