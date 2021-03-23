@@ -4,7 +4,7 @@
 #### Installation
 
 ```ssh
-composer require dietervyncke/dry-external-api
+composer require tallieutallieu/dry-external-api
 ```
 
 #### Example usage

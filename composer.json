@@ -1,5 +1,5 @@
 {
-  "name": "dietervyncke/dry-external-api",
+  "name": "tallieutallieu/dry-external-api",
   "description": "An external API for your DRY applications",
   "keywords": ["external-api", "API", "dry", "restful", "rest"],
   "type": "library",
@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "reinvanoyen/oak": "^1.0.0",
+    "tallieutallieu/oak": "^1.0.0",
     "ext-json": "*"
   },
   "autoload": {
