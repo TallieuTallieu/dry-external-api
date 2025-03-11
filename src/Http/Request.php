@@ -23,7 +23,7 @@ class Request
 	private $headers = [];
 
 	/**
-	 * @var array $parameters
+	 * @var RequestDataWrapper $parameters
 	 */
 	public $parameters = [];
 
