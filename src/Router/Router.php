@@ -168,7 +168,6 @@ class Router
 				'error_code' => 'invalid_action',
 			];
 		}
-
 		\dry\http\Response::set_content_type(\dry\http\Response::APPLICATION_JSON);
 		echo json_encode($return);
 	}

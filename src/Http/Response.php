@@ -4,20 +4,20 @@ namespace Tnt\ExternalApi\Http;
 
 class Response
 {
-    static const STATUS_OK = 200;
-    static const STATUS_CREATED = 201;
-    static const STATUS_BAD_REQUEST = 400;
-    static const STATUS_UNAUTHORIZED = 401;
-    static const STATUS_FORBIDDEN = 403;
-    static const STATUS_NOT_FOUND = 404;
-    static const STATUS_INTERNAL_ERROR = 500;
+    const STATUS_OK = 200;
+    const STATUS_CREATED = 201;
+    const STATUS_BAD_REQUEST = 400;
+    const STATUS_UNAUTHORIZED = 401;
+    const STATUS_FORBIDDEN = 403;
+    const STATUS_NOT_FOUND = 404;
+    const STATUS_INTERNAL_ERROR = 500;
 
-    static const CODE_BAD_REQUEST = 'bad_request';
-    static const CODE_INVALID_DATA = 'invalid_data';
-    static const CODE_UNAUTHORIZED = 'unauthorized';
-    static const CODE_FORBIDDEN = 'forbidden';
-    static const CODE_NOT_FOUND = 'not_found';
-    static const CODE_INTERNAL_ERROR = 'internal_error';
+    const CODE_BAD_REQUEST = 'bad_request';
+    const CODE_INVALID_DATA = 'invalid_data';
+    const CODE_UNAUTHORIZED = 'unauthorized';
+    const CODE_FORBIDDEN = 'forbidden';
+    const CODE_NOT_FOUND = 'not_found';
+    const CODE_INTERNAL_ERROR = 'internal_error';
 
 
 	/**
