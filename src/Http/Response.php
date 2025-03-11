@@ -15,6 +15,9 @@ class Response
     static const CODE_BAD_REQUEST = 'bad_request';
     static const CODE_INVALID_DATA = 'invalid_data';
     static const CODE_UNAUTHORIZED = 'unauthorized';
+    static const CODE_FORBIDDEN = 'forbidden';
+    static const CODE_NOT_FOUND = 'not_found';
+    static const CODE_INTERNAL_ERROR = 'internal_error';
 
 
 	/**
@@ -79,6 +82,21 @@ class Response
     public static function unauthorized($data = [], $error_code = self::CODE_UNAUTHORIZED)
     {
         return new self($data, self::STATUS_UNAUTHORIZED, $error_code);
+    }
+
+    public static function forbidden($data = [], $error_code = self::CODE_FORBIDDEN)
+    {
+        return new self($data, self::STATUS_FORBIDDEN, $error_code);
+    }
+
+    public static function notFound($data = [], $error_code = self::CODE_NOT_FOUND)
+    {
+        return new self($data, self::STATUS_NOT_FOUND, $error_code);
+    }
+
+    public static function internalError($data = [], $error_code = self::CODE_INTERNAL_ERROR)
+    {
+        return new self($data, self::STATUS_INTERNAL_ERROR, $error_code);
     }
 
     public function toArray() {
