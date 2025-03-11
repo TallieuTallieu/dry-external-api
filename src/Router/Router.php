@@ -6,6 +6,7 @@ use dry\internals\http\RequestDataWrapper;
 use Oak\Contracts\Container\ContainerInterface;
 use Tnt\ExternalApi\Exception\ApiException;
 use Tnt\ExternalApi\Http\Request;
+use Tnt\ExternalApi\Http\Response;
 
 class Router
 {
@@ -138,10 +139,18 @@ class Router
 				$controllerInstance = $this->app->get($className);
 
 				try {
-					$return = [
-						'success' => true,
-						'result' => call_user_func([$controllerInstance, $method], $request),
-					];
+                    $response = call_user_func([$controllerInstance, $method], $request);
+
+                    if ($response instanceof Response) {
+                        $return = $response->toArray();
+                        http_response_code($response->status);
+                    } else {
+                        $return = [
+                            'success' => true,
+                            'result' => call_user_func([$controllerInstance, $method], $request),
+                        ];
+                    }
+
 				}
 				catch (ApiException $e) {
 					$return = [
@@ -159,7 +168,6 @@ class Router
 				'error_code' => 'invalid_action',
 			];
 		}
-
 		\dry\http\Response::set_content_type(\dry\http\Response::APPLICATION_JSON);
 		echo json_encode($return);
 	}
