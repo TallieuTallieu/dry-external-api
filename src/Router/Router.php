@@ -147,7 +147,7 @@ class Router
                     } else {
                         $return = [
                             'success' => true,
-                            'result' => call_user_func([$controllerInstance, $method], $request),
+                            'result' => $response,
                         ];
                     }
 
