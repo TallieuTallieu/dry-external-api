@@ -3,14 +3,9 @@
   "description": "An external API for your DRY applications",
   "keywords": ["external-api", "API", "dry", "restful", "rest"],
   "type": "library",
-  "authors": [
-    {
-      "name": "Dieter Vyncke",
-      "email": "vynckedieter@gmail.com"
-    }
-  ],
   "require": {
-    "tallieutallieu/oak": "^1.0.0 | dev-php8.2",
+    "tallieutallieu/dry": "^v3.8.0-beta.14",
+    "tallieutallieu/oak": "^3.0.2",
     "ext-json": "*"
   },
   "autoload": {
