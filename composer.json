@@ -4,6 +4,7 @@
   "keywords": ["external-api", "API", "dry", "restful", "rest"],
   "type": "library",
   "require": {
+    "tallieutallieu/dry": "^v3.8.0-beta.14",
     "tallieutallieu/oak": "^3.0.2",
     "ext-json": "*"
   },
