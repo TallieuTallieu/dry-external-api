@@ -1,2 +1,5 @@
 .idea
 .wakatime-project
+/vendor/
+# A library: consumers resolve their own dependencies
+composer.lock
