@@ -1,0 +1,19 @@
+networks:
+  dev:
+    external: true
+
+services:
+  dry-external-api-dev:
+    build: https://github.com/TallieuTallieu/dry-docker.git#php8.4
+    hostname: docker_app
+    volumes:
+      - .:/var/www/html
+      - ~/.ssh:/root/.ssh:ro
+    ports:
+      - '80'
+    command:
+      [
+        'sh',
+        '-c',
+        'eval `ssh-agent -s` && ssh-add && apache2ctl -D FOREGROUND',
+      ]

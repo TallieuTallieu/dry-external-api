@@ -11,13 +11,19 @@
   "type": "library",
   "require": {
     "php": "^8.4",
-    "tallieutallieu/dry": "^3.0.0|^4.0.0",
-    "tallieutallieu/oak": "^3.0.2 || ^4.0",
+    "tallieutallieu/dry": "^4.7.2",
+    "tallieutallieu/oak": "^4.3.0",
     "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
       "Tnt\\ExternalApi\\": "src/"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:tallieu/dry3.git"
+    }
+  ]
 }
